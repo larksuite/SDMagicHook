@@ -67,6 +67,12 @@ Example for hooking class method:
     [[DemoVC3 class] removeHook:@selector(testClassMethod) key:&testClassMethodTag];
 }
 ```
+Example for observe any instance's dealloc event. 
+```objc
+[[NSObject new] addObjectDeallocCallbackBlock:^{
+    printf("Will dealloc...");
+}];
+```
 
 Example for hooking UIViewController's `viewDidDisappear:` method with Swift:
 
