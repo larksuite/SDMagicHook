@@ -1,5 +1,7 @@
 # SDMagicHook
 
+[中文文档](./README_CN.md)
+
 A safe and influence-restricted method hooking for both Objective-C and Swift.
 
 ## Improvement
