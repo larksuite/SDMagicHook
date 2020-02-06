@@ -1,6 +1,6 @@
 # SDMagicHook
 
-一种可以用于Objective-C 和 Swift的安全的影响范围可控的基于实例维度的hook工具。
+一种可以用于Objective-C 和 Swift的安全的影响范围可控的基于实例粒度的hook工具。
 
 ## 对传统swizzling的改进
 
