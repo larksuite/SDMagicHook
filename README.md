@@ -1,6 +1,6 @@
 # SDMagicHook
 
-[中文文档](./README_CN.md)
+[中文文档](./README_CN.md) [原理解析](https://mp.weixin.qq.com/s/wxigL1Clem1dR8Nkt8LLMw)
 
 A safe and influence-restricted method hooking for both Objective-C and Swift.
 
