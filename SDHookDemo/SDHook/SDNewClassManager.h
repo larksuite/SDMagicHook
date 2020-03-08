@@ -19,11 +19,12 @@ typedef void (^OnClassDisposeBlock)(void);
 @property (nonatomic, strong) NSMutableSet *selSet;
 @property (nonatomic, strong) SDDict *sel_block_dict;
 @property (nonatomic, strong) SDOrderedDict *sel_ordered_dict;
-@property (nonatomic, assign) int randomFlag;
+@property (nonatomic, copy, readonly) NSString *randomFlag;
 @property (nonatomic, strong) NSMutableDictionary *resetCountDict;
 @property (nonatomic, copy) OnClassDisposeBlock onClassDispose;
 @property (nonatomic, copy) NSString *className;
 @property (nonatomic, strong) NSMutableArray *deallocCallBackBlockArr;
+@property (nonatomic, assign) BOOL hasSetupKVO;
 
 - (void)addSelValue:(NSString *)value forMainKey:(NSString *)selStr subKey:(NSString *)strId;
 - (void)deleteSelValue:(NSString *)value forMainKey:(NSString *)selStr subKey:(NSString *)strId;

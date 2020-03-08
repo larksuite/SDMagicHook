@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		48366EC223B4EFA8000786B9 /* DemoVC4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48366EC123B4EFA8000786B9 /* DemoVC4.swift */; };
+		485FD535241546910035BC7A /* SDMRCTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FD533241546910035BC7A /* SDMRCTool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		487792BD23857FB200E3DAE8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792BC23857FB200E3DAE8 /* AppDelegate.m */; };
 		487792C023857FB200E3DAE8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792BF23857FB200E3DAE8 /* SceneDelegate.m */; };
 		487792C623857FB200E3DAE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 487792C423857FB200E3DAE8 /* Main.storyboard */; };
@@ -33,6 +34,8 @@
 /* Begin PBXFileReference section */
 		48366EC023B4EFA7000786B9 /* SDMagicHookDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SDMagicHookDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		48366EC123B4EFA8000786B9 /* DemoVC4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoVC4.swift; sourceTree = "<group>"; };
+		485FD533241546910035BC7A /* SDMRCTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMRCTool.m; sourceTree = "<group>"; };
+		485FD534241546910035BC7A /* SDMRCTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMRCTool.h; sourceTree = "<group>"; };
 		487792B823857FB200E3DAE8 /* SDHookDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDHookDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		487792BB23857FB200E3DAE8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		487792BC23857FB200E3DAE8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -119,6 +122,8 @@
 		487792D423857FD000E3DAE8 /* SDHook */ = {
 			isa = PBXGroup;
 			children = (
+				485FD534241546910035BC7A /* SDMRCTool.h */,
+				485FD533241546910035BC7A /* SDMRCTool.m */,
 				487792D523857FD000E3DAE8 /* SDNewClassManager.h */,
 				487792D623857FD000E3DAE8 /* SDMagicHook.h */,
 				487792D723857FD000E3DAE8 /* SDClassManagerLock.m */,
@@ -252,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				487792E623857FD000E3DAE8 /* SDOrderedDict.m in Sources */,
+				485FD535241546910035BC7A /* SDMRCTool.m in Sources */,
 				487792E423857FD000E3DAE8 /* SDNewClassManager.m in Sources */,
 				48366EC223B4EFA8000786B9 /* DemoVC4.swift in Sources */,
 				48A89388238AB10800E624FF /* UIView+SDAutoLayout.m in Sources */,

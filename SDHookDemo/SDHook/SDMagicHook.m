@@ -15,6 +15,7 @@
 #import "SDClassManagerLock.h"
 #import "SDDict.h"
 #import "SDOrderedDict.h"
+#import "SDMRCTool.h"
 
 BOOL SDMagicHookDebugFlag = true;
 
@@ -29,12 +30,14 @@ SEL createSel(SEL sel, NSString *str) {
     return NSSelectorFromString(newSelStr);
 }
 
-SEL createSelA(SEL sel, int index) {
-    return createSel(sel, createSelHeaderString(@"A", index));
+SEL createSelA(SEL sel, int index, NSString *flag) {
+    NSString *header = [NSString stringWithFormat:@"A_%@", flag];
+    return createSel(sel, createSelHeaderString(header, index));
 }
 
-SEL createSelB(SEL sel, int index) {
-    return createSel(sel, createSelHeaderString(@"B", index));
+SEL createSelB(SEL sel, int index, NSString *flag) {
+    NSString *header = [NSString stringWithFormat:@"B_%@", flag];
+    return createSel(sel, createSelHeaderString(header, index));
 }
 
 NSString* currentThreadTag() {
@@ -164,12 +167,41 @@ static NSString *const keyForOriginalCallFlag = @"SDMagicHook-keyForOriginalCall
     [self hookMethod:sel strId:strId imp:imp_implementationWithBlock(block)];
 }
 
+- (BOOL)isKVOClass:(Class)cls {
+    const char *clsCStrName = class_getName(cls);
+    void *startPos = strstr(clsCStrName, "NSKVONotifying_");
+    return startPos && startPos == clsCStrName;
+}
+
+- (BOOL)isSDMagicHookClass:(Class)cls {
+    const char *clsCStrName = class_getName(cls);
+    void *startPos = strstr(clsCStrName, "SDMagicHook_");
+    return startPos && startPos == clsCStrName;
+}
+
 - (NSString *)hookMethod:(SEL)sel strId:(NSString *)strId imp:(IMP)imp {
     pthread_rwlock_wrlock(&[self getManagerLock]->_rw_lock3);
     SDNewClassManager *mgr = [self getClassManager];
+    if (!mgr.hasSetupKVO) {
+        [self addObserver:mgr forKeyPath:@"class" options:NSKeyValueObservingOptionNew context:nil];
+        mgr.hasSetupKVO = YES;
+    }
     NSString *selStr = NSStringFromSelector(sel);
-    Class originalCls = self.class;
     Class currentCls = object_getClass(self);
+    Class superClass = class_getSuperclass(currentCls);
+    BOOL isKVOClass = NO;
+    Class kvoClass = nil;
+    Class kvoOriginalClass = nil;
+    if ([self isKVOClass:currentCls]) {
+        isKVOClass = YES;
+        kvoClass = currentCls;
+        kvoOriginalClass = superClass;
+    } else if ([self isKVOClass:superClass]) {
+        isKVOClass = YES;
+        kvoClass = superClass;
+        kvoOriginalClass = class_getSuperclass(superClass);
+    }
+
     if (strId) {
         NSString *targetSelString = [mgr.sel_block_dict valueForMainKey:selStr subKey:strId];
         if (targetSelString) {
@@ -178,36 +210,18 @@ static NSString *const keyForOriginalCallFlag = @"SDMagicHook-keyForOriginalCall
             return strId;
         }
     }
-    const char *originalClsName = class_getName(originalCls);
-    NSString *newName = [NSString stringWithFormat:@"SDMagicHook_%s_%p_%d", originalClsName, self, mgr.randomFlag];
+
+    NSString *newClsName = [self genNewClassNameWith:currentCls];
     int resetTimes = [self sd_resetCountForSel:sel];
     Method method = class_getInstanceMethod(currentCls, sel);
-    Class cls = NSClassFromString(newName);;
-    if (cls == nil) {
-        cls = objc_allocateClassPair(currentCls, newName.UTF8String, 0);
-        SEL forwardSel = @selector(forwardInvocation:);
-        Method sdForwardMethod = class_getInstanceMethod([NSObject class], @selector(sd_forwardInvocation:));
-        class_addMethod(cls, forwardSel, method_getImplementation(sdForwardMethod), method_getTypeEncoding(sdForwardMethod));
-        [self addGetClassImpToClass:cls];
-        objc_registerClassPair(cls);
-        SDNewClassManager *mgr = [self getClassManager];
-        mgr.className = newName;
-        [mgr.classArr addObject:cls];
-        mgr.onClassDispose = ^{
-            NSThread *main = [NSThread mainThread];
-            NSArray *keys = @[currentCallIndexDictKey, originalCallFlagDictKey, debugOriginalCallDictKey, keyForOriginalCallFlag];
-            NSMutableDictionary *dict = main.threadDictionary;
-            [keys enumerateObjectsUsingBlock:^(NSString * _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([dict valueForKey:entryForThreadStoredDict(key, newName)] == nil) {
-                    *stop = YES;
-                    return;
-                }
-                [dict removeObjectForKey:entryForThreadStoredDict(key, newName)];
-            }];
-        };
+    Class newCls = NSClassFromString(newClsName);
+    if (newCls == nil && newClsName) {
+        newCls = [self setupNewClassWithName:newClsName currentCls:currentCls isKVOClass:isKVOClass];
     }
-    if (cls == nil) {
+    if (newCls == nil) {
         return nil;
+    } else if (object_getClass(self) != newCls) {
+        object_setClass(self, newCls);
     }
 
     NSAssert(method != NULL, ([NSString stringWithFormat:@"The Selector `%@` may be wrong, please check it!", selStr]));
@@ -226,22 +240,25 @@ static NSString *const keyForOriginalCallFlag = @"SDMagicHook-keyForOriginalCall
     }
     #endif
     int headerStrCount = resetTimes + 1;
-
+    NSString *uniqueFlag = mgr.randomFlag;
     if (originalImp != msgForwardImp) {
-        class_addMethod(cls, sel, msgForwardImp, types);
-        SEL selB = createSelB(sel, headerStrCount);
+        class_addMethod(newCls, sel, msgForwardImp, types);
+        SEL selB = createSelB(sel, headerStrCount, uniqueFlag);
         NSString *strSelB = NSStringFromSelector(selB);
-        class_addMethod(cls, selB, originalImp, types);
+        class_addMethod(newCls, selB, originalImp, types);
         [mgr addSelValue:NSStringFromSelector(selB) forMainKey:selStr subKey:strSelB];
-        object_setClass(self, cls);
+
+        if (isKVOClass) {
+            [self copyKVODataWith:kvoOriginalClass newClass:newCls originalSel:sel customSel:selB];
+        }
     }
 
     IMP impA = imp;
-    SEL selA = createSelA(sel, headerStrCount);
-    class_addMethod(cls, selA, impA, types);
+    SEL selA = createSelA(sel, headerStrCount, uniqueFlag);
+    class_addMethod(newCls, selA, impA, types);
 
     if (!strId) {
-        strId = [NSString stringWithFormat:@"%@-%@-%d", newName, selStr, resetTimes];
+        strId = [NSString stringWithFormat:@"%@-%@-%d", newClsName, selStr, resetTimes];
     }
     NSString *strSelA = NSStringFromSelector(selA);
     [mgr addSelValue:strSelA forMainKey:selStr subKey:strId];
@@ -249,8 +266,102 @@ static NSString *const keyForOriginalCallFlag = @"SDMagicHook-keyForOriginalCall
     [[self getClassManager].selSet addObject:selStr];
     [self set_sd_resetCount:headerStrCount forSel:sel];
     [self setCurrentCallIndex:(int)[[mgr.sel_ordered_dict valueArrForKey:selStr] count] - 1 forSel:sel];
+
+    SEL addObserverSel = @selector(addObserver:forKeyPath:options:context:);
+    Method addObserverMethod = class_getInstanceMethod(newCls, addObserverSel);
+    BOOL shouldHookObserverMethod = method_getImplementation(addObserverMethod) != msgForwardImp;
     pthread_rwlock_unlock(&[self getManagerLock]->_rw_lock3);
+
+    if (shouldHookObserverMethod) {
+        [self hookKVOMethodWith:addObserverSel kvoClass:kvoClass newCls:newCls];
+    }
+
     return strId;
+}
+
+- (void)hookKVOMethodWith:(SEL)addObserverSel kvoClass:(Class)kvoClass newCls:(Class)newCls {
+    [self hookMethod:addObserverSel impBlock:^(typeof(self) this, id obs, NSString *keyPath, NSKeyValueObservingOptions ops, void *contex){
+        Class currentCls = object_getClass(this);
+        Class superClass = class_getSuperclass(currentCls);
+        BOOL isKVOCls = [this isKVOClass:currentCls] | [this isKVOClass:superClass];
+        [this callOriginalMethodInBlock:^{
+            [this addObserver:obs forKeyPath:keyPath options:ops context:contex];
+        }];
+        if (isKVOCls) {
+            Class kvoCls = object_getClass(this);
+            Class kvoOriginalCls = class_getSuperclass(kvoCls);
+            Class newKVOCls = [this setupNewClassWithName:[self genNewClassNameWith:kvoClass] currentCls:kvoClass isKVOClass:true];
+            NSString *property = [keyPath componentsSeparatedByString:@"."].lastObject;
+            if (property) {
+                NSString *first = [[property substringToIndex:1] uppercaseString];
+                property = [NSString stringWithFormat:@"set%@%@:", first, [property substringFromIndex:1]];
+                NSArray *selsArr = [[[this getClassManager].sel_ordered_dict valueArrForKey:property] copy];
+                SEL originalSel = NSSelectorFromString(property);
+                SEL customSel = NSSelectorFromString(selsArr.firstObject);
+                if (customSel) {
+                    [this copyKVODataWith:kvoOriginalCls
+                                 newClass:newKVOCls
+                              originalSel:originalSel
+                                customSel:customSel];
+                    Method originalMethod = class_getInstanceMethod(kvoCls, originalSel);
+                    class_replaceMethod(newCls, customSel, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+                }
+            }
+        }
+    }];
+}
+
+- (void)copyKVODataWith:(Class)kvoOriginalClass newClass:(Class)newCls originalSel:(SEL)sel customSel:(SEL)selB {
+    Method method = class_getInstanceMethod(kvoOriginalClass, sel);
+    [SDMRCTool copyClassIndexedIvarsCFDictionaryValue:newCls from:sel to:selB];
+    class_addMethod(kvoOriginalClass, selB, method_getImplementation(method), method_getTypeEncoding(method));
+}
+
+- (NSString *)genNewClassNameWith:(Class)currentCls {
+    NSString *newClsName = nil;
+    const char *currentClsName = class_getName(currentCls);
+    if (![self isSDMagicHookClass:currentCls]) {
+        newClsName = [NSString stringWithFormat:@"SDMagicHook_%s_%@", currentClsName, [self getClassManager].randomFlag];
+    } else {
+        newClsName = [NSString stringWithUTF8String:currentClsName];
+    }
+    return newClsName;
+}
+
+- (Class)setupNewClassWithName:(NSString *)newClsName currentCls:(Class)currentCls  isKVOClass:(BOOL)isKVOClass {
+    Class newCls = NSClassFromString(newClsName);
+    if (!newCls && (newCls = objc_allocateClassPair(currentCls, newClsName.UTF8String, 0x68))) {
+        NSAssert(newCls, @"Fatal SDMagicHookError, class generation faild!");
+        SEL forwardSel = @selector(forwardInvocation:);
+        Method sdForwardMethod = class_getInstanceMethod([NSObject class], @selector(sd_forwardInvocation:));
+        class_addMethod(newCls, forwardSel, method_getImplementation(sdForwardMethod), method_getTypeEncoding(sdForwardMethod));
+        [self addGetClassImpToClass:newCls];
+        objc_registerClassPair(newCls);
+        if (isKVOClass) {
+            [SDMRCTool object_copyIndexedIvars:newCls toCopy:currentCls];
+        }
+        SDNewClassManager *mgr = [self getClassManager];
+        mgr.className = newClsName;
+        [mgr.classArr addObject:newCls];
+        mgr.onClassDispose = ^{
+            NSThread *main = [NSThread mainThread];
+            NSArray *keys = @[currentCallIndexDictKey, originalCallFlagDictKey, debugOriginalCallDictKey, keyForOriginalCallFlag];
+            NSMutableDictionary *dict = main.threadDictionary;
+            [keys enumerateObjectsUsingBlock:^(NSString * _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([dict valueForKey:entryForThreadStoredDict(key, newClsName)] == nil) {
+                    *stop = YES;
+                    return;
+                }
+                [dict removeObjectForKey:entryForThreadStoredDict(key, newClsName)];
+            }];
+        };
+    }
+
+    if (newCls == nil) {
+        return nil;
+    }
+    object_setClass(self, newCls);
+    return newCls;
 }
 
 - (void)removeHook:(SEL)sel key:(const void *)key {

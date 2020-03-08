@@ -11,6 +11,7 @@
 #import "SDOrderedDict.h"
 #import <objc/runtime.h>
 #import "SDMagicHook.h"
+#import <CommonCrypto/CommonCrypto.h>
 
 @implementation SDNewClassManager
 
@@ -20,11 +21,25 @@
         _selSet = [NSMutableSet new];
         _sel_block_dict = [SDDict new];
         _sel_ordered_dict = [SDOrderedDict new];
-        _randomFlag = arc4random_uniform(99999999);
+        _randomFlag = [self md5:[NSUUID new].UUIDString];
         _resetCountDict = [NSMutableDictionary new];
         _deallocCallBackBlockArr = [NSMutableArray new];
     }
     return self;
+}
+
+- (nullable NSString *)md5:(nullable NSString *)str {
+    if (!str) return nil;
+
+    const char *cStr = str.UTF8String;
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(cStr, (CC_LONG)strlen(cStr), result);
+
+    NSMutableString *md5Str = [NSMutableString string];
+    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; ++i) {
+        [md5Str appendFormat:@"%02x", result[i]];
+    }
+    return md5Str;
 }
 
 - (void)dealloc {
@@ -53,6 +68,10 @@
 - (void)deleteSelValue:(NSString *)value forMainKey:(NSString *)selStr subKey:(NSString *)strId {
     [_sel_block_dict setValue:nil forMainKey:selStr subKey:strId];
     [_sel_ordered_dict deleteValue:value withKey:selStr];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    // do nothing
 }
 
 @end
