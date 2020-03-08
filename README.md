@@ -14,6 +14,9 @@ Classical method swizzling with method_exchangeImplementations is quite simple, 
 
 Now SDMagicHook will solve the problems mentioned above.
 
+## Changes Log
+2020.03.09 -- KVO compatible 
+
 ## Usage
 
 Example for hooking CALayer's `setBackgroundColor:` method to find the one who secretly changed the background color of the view:
