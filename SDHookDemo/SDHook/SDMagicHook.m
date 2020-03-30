@@ -16,9 +16,22 @@
 #import "SDDict.h"
 #import "SDOrderedDict.h"
 #import "SDMRCTool.h"
+#import "fishhook.h"
 
 BOOL SDMagicHookDebugFlag = true;
+Class _Nullable (*sd_original_setclass) (id _Nullable obj, Class _Nonnull cls);
+extern Class _Nullable sd_magichook_set_calss(id _Nullable obj, Class _Nonnull cls);
 
+
+bool sd_ifClassNameHasPrefix(Class cls, const char *prefix) {
+    const char *clsCStrName = class_getName(cls);
+    void *startPos = strstr(clsCStrName, prefix);
+    return startPos && startPos == clsCStrName;
+}
+
+bool sd_ifClassIsSDMagicClass(Class cls) {
+    return sd_ifClassNameHasPrefix(cls, "SDMagicHook_");
+}
 
 NSString* createSelHeaderString(NSString *str, int index) {
     return [NSString stringWithFormat:@"__%d_%@", index, str];
@@ -181,6 +194,12 @@ static NSString *const keyForOriginalCallFlag = @"SDMagicHook-keyForOriginalCall
 
 - (NSString *)hookMethod:(SEL)sel strId:(NSString *)strId imp:(IMP)imp {
     pthread_rwlock_wrlock(&[self getManagerLock]->_rw_lock3);
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        rebind_symbols((struct rebinding[1]){{"object_setClass", sd_magichook_set_calss, (void *)&sd_original_setclass}}, 1);
+    });
+
     SDNewClassManager *mgr = [self getClassManager];
     if (!mgr.hasSetupKVO) {
         [self addObserver:mgr forKeyPath:@"class" options:NSKeyValueObservingOptionNew context:nil];
@@ -281,31 +300,29 @@ static NSString *const keyForOriginalCallFlag = @"SDMagicHook-keyForOriginalCall
 
 - (void)hookKVOMethodWith:(SEL)addObserverSel kvoClass:(Class)kvoClass newCls:(Class)newCls {
     [self hookMethod:addObserverSel impBlock:^(typeof(self) this, id obs, NSString *keyPath, NSKeyValueObservingOptions ops, void *contex){
-        Class currentCls = object_getClass(this);
-        Class superClass = class_getSuperclass(currentCls);
-        BOOL isKVOCls = [this isKVOClass:currentCls] | [this isKVOClass:superClass];
+
         [this callOriginalMethodInBlock:^{
             [this addObserver:obs forKeyPath:keyPath options:ops context:contex];
         }];
-        if (isKVOCls) {
-            Class kvoCls = object_getClass(this);
-            Class kvoOriginalCls = class_getSuperclass(kvoCls);
-            Class newKVOCls = [this setupNewClassWithName:[self genNewClassNameWith:kvoClass] currentCls:kvoClass isKVOClass:true];
-            NSString *property = [keyPath componentsSeparatedByString:@"."].lastObject;
-            if (property) {
-                NSString *first = [[property substringToIndex:1] uppercaseString];
-                property = [NSString stringWithFormat:@"set%@%@:", first, [property substringFromIndex:1]];
-                NSArray *selsArr = [[[this getClassManager].sel_ordered_dict valueArrForKey:property] copy];
-                SEL originalSel = NSSelectorFromString(property);
-                SEL customSel = NSSelectorFromString(selsArr.firstObject);
-                if (customSel) {
-                    [this copyKVODataWith:kvoOriginalCls
-                                 newClass:newKVOCls
-                              originalSel:originalSel
-                                customSel:customSel];
-                    Method originalMethod = class_getInstanceMethod(kvoCls, originalSel);
-                    class_replaceMethod(newCls, customSel, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
-                }
+
+        // copy KVO data
+        Class currentClass = object_getClass(this);
+        Class kvoCls = class_getSuperclass(currentClass);
+        Class kvoOriginalCls = class_getSuperclass(kvoCls);
+        NSString *property = [keyPath componentsSeparatedByString:@"."].lastObject;
+        if (property) {
+            NSString *first = [[property substringToIndex:1] uppercaseString];
+            property = [NSString stringWithFormat:@"set%@%@:", first, [property substringFromIndex:1]];
+            NSArray *selsArr = [[[this getClassManager].sel_ordered_dict valueArrForKey:property] copy];
+            SEL originalSel = NSSelectorFromString(property);
+            SEL customSel = NSSelectorFromString(selsArr.firstObject);
+            if (customSel) {
+                [this copyKVODataWith:kvoOriginalCls
+                             newClass:currentClass
+                          originalSel:originalSel
+                            customSel:customSel];
+                Method originalMethod = class_getInstanceMethod(kvoCls, originalSel);
+                class_replaceMethod(newCls, customSel, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
             }
         }
     }];

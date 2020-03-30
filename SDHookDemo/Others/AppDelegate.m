@@ -7,34 +7,65 @@
 //
 
 #import "AppDelegate.h"
+#import "SDMagicHook.h"
+
+@interface Test : NSObject
+@property (nonatomic, assign) int num;
+@property (nonatomic, assign) int height;
+@end
+
+@implementation Test
+
+- (void)setNum:(int)num {
+    _num = num;
+}
+
+@end
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-
+{
+    Test *_test;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    _test = [Test new];
+    [_test addObserver:self forKeyPath:@"num" options:NSKeyValueObservingOptionNew context:nil];
+//    _test.num = 10;
+//
+//    _test.num = 1122;
+
+
+//    [_test willChangeValueForKey:@"num"];
+//    [_test didChangeValueForKey:@"num"];
+
+
+//    [_test hookMethod:@selector(setHeight:) impBlock:^(typeof(self->_test) this, int height) {
+//        [this callOriginalMethodInBlock:^{
+//            [this setHeight:height];
+//        }];
+//    }];
+
+    [_test addObserver:self forKeyPath:@"height" options:NSKeyValueObservingOptionNew context:nil];
+
+    _test.height = 100;
+
     return YES;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    NSLog(@">> %@, %@", keyPath, change);
 }
 
 
 #pragma mark - UISceneSession lifecycle
 
-
-- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
-    // Called when a new scene session is being created.
-    // Use this method to select a configuration to create the new scene with.
-    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
-}
-
-
-- (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
-    // Called when the user discards a scene session.
-    // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-    // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    _test.num++;
 }
 
 

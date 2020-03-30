@@ -9,6 +9,34 @@
 #import "DemoVC1.h"
 #import "SDMagicHook.h"
 
+@interface TestA : NSObject
+
+- (void)test;
+
+@end
+
+@implementation TestA
+
+- (void)test {
+    printf("AAAAAAAAAAAAA");
+}
+
+@end
+
+@interface TestB : TestA
+
+@end
+
+@implementation TestB
+
+- (void)test {
+    printf("BBBBBBBBBBBBB");
+}
+
+@end
+
+
+
 @interface DemoVC1 ()
 
 @end
@@ -89,6 +117,26 @@
     [super viewDidLoad];
 
     [self setupViews];
+
+
+    TestA *a = [TestA new];
+    NSString *atag = [a hookMethod:@selector(test) impBlock:^(typeof(a) this){
+        [this callOriginalMethodInBlock:^{
+            [this test];
+        }];
+        printf("a hookMethod:@selector(test)");
+    }];
+    [a test];
+    [a removeHook:@selector(test) strId:atag];
+
+    TestB *b = [TestB new];
+    [b hookMethod:@selector(test) impBlock:^(typeof(b) this){
+        [this callOriginalMethodInBlock:^{
+            [this test];
+        }];
+        printf("b hookMethod:@selector(test)");
+    }];
+    [b test];
 }
 
 - (BOOL)pointCheck:(CGPoint)p view:(UIView *)v {
