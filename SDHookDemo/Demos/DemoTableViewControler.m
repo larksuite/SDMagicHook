@@ -33,6 +33,8 @@ NSString * const demo4Description = @"SDMagicHook在Swift中的使用\n\n请看D
 
     [self doEvil];
 
+//    self.view.userInteractionEnabled = NO;
+
 }
 
 
