@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		48366EC223B4EFA8000786B9 /* DemoVC4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48366EC123B4EFA8000786B9 /* DemoVC4.swift */; };
+		483E4E5D2433906000A1195B /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 483E4E5B2433906000A1195B /* fishhook.c */; };
 		485FD535241546910035BC7A /* SDMRCTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FD533241546910035BC7A /* SDMRCTool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		487792BD23857FB200E3DAE8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792BC23857FB200E3DAE8 /* AppDelegate.m */; };
 		487792C023857FB200E3DAE8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792BF23857FB200E3DAE8 /* SceneDelegate.m */; };
@@ -34,6 +35,8 @@
 /* Begin PBXFileReference section */
 		48366EC023B4EFA7000786B9 /* SDMagicHookDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SDMagicHookDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		48366EC123B4EFA8000786B9 /* DemoVC4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoVC4.swift; sourceTree = "<group>"; };
+		483E4E5B2433906000A1195B /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
+		483E4E5C2433906000A1195B /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
 		485FD533241546910035BC7A /* SDMRCTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMRCTool.m; sourceTree = "<group>"; };
 		485FD534241546910035BC7A /* SDMRCTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMRCTool.h; sourceTree = "<group>"; };
 		487792B823857FB200E3DAE8 /* SDHookDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDHookDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +91,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		483E4E592433906000A1195B /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				483E4E5A2433906000A1195B /* FishHook */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		483E4E5A2433906000A1195B /* FishHook */ = {
+			isa = PBXGroup;
+			children = (
+				483E4E5B2433906000A1195B /* fishhook.c */,
+				483E4E5C2433906000A1195B /* fishhook.h */,
+			);
+			path = FishHook;
+			sourceTree = "<group>";
+		};
 		487792AF23857FB200E3DAE8 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +127,7 @@
 		487792BA23857FB200E3DAE8 /* SDHookDemo */ = {
 			isa = PBXGroup;
 			children = (
+				483E4E592433906000A1195B /* Libs */,
 				487792E82385802500E3DAE8 /* Demos */,
 				487792E72385802500E3DAE8 /* Others */,
 				487792D423857FD000E3DAE8 /* SDHook */,
@@ -262,6 +283,7 @@
 				48366EC223B4EFA8000786B9 /* DemoVC4.swift in Sources */,
 				48A89388238AB10800E624FF /* UIView+SDAutoLayout.m in Sources */,
 				487792E223857FD000E3DAE8 /* SDDict.m in Sources */,
+				483E4E5D2433906000A1195B /* fishhook.c in Sources */,
 				487792E123857FD000E3DAE8 /* SDClassManagerLock.m in Sources */,
 				48A8938F238AD18800E624FF /* DemoVC3.m in Sources */,
 				48A8938C238AB82500E624FF /* DemoVC2.m in Sources */,

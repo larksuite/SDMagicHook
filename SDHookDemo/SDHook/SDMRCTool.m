@@ -7,6 +7,25 @@
 //
 
 #import "SDMRCTool.h"
+#include <objc/runtime.h>
+
+extern bool sd_ifClassNameHasPrefix(Class cls, const char *prefix);
+extern bool sd_ifClassIsSDMagicClass(Class cls);
+extern Class _Nullable (*sd_original_setclass) (id _Nullable obj, Class _Nonnull cls);
+
+Class _Nullable sd_magichook_set_calss(id _Nullable obj, Class _Nonnull cls) {
+
+    if (sd_ifClassNameHasPrefix(cls, "NSKVONotifying_")) {
+        Class originalClass = object_getClass(obj);
+        if (sd_ifClassIsSDMagicClass(originalClass)) {
+            return originalClass;
+        } else {
+            return sd_original_setclass(obj, cls);
+        }
+    } else {
+        return sd_original_setclass(obj, cls);
+    }
+}
 
 @implementation SDMRCTool
 
