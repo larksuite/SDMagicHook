@@ -7,7 +7,7 @@
 //
 
 #import "DemoVC3.h"
-#import "SDMagicHook.h"
+#import <SDMagicHook.h>
 
 static int testClassMethodTag;
 

@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-SDHookDemo/Pods-SDHookDemo-frameworks.sh
+${BUILT_PRODUCTS_DIR}/SDAutoLayout/SDAutoLayout.framework
+${BUILT_PRODUCTS_DIR}/SDMagicHook/SDMagicHook.framework
+${BUILT_PRODUCTS_DIR}/fishhook/fishhook.framework

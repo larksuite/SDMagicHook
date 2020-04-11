@@ -7,7 +7,7 @@
 //
 
 #import "DemoVC1.h"
-#import "SDMagicHook.h"
+#import <SDMagicHook.h>
 
 @interface TestA : NSObject
 

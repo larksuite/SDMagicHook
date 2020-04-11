@@ -1,0 +1,30 @@
+PODS:
+  - fishhook (0.2)
+  - SDAutoLayout (2.2.1)
+  - SDMagicHook (1.1.0):
+    - fishhook
+    - SDMagicHook/mrc (= 1.1.0)
+  - SDMagicHook/mrc (1.1.0):
+    - fishhook
+
+DEPENDENCIES:
+  - SDAutoLayout
+  - SDMagicHook (from `.`)
+
+SPEC REPOS:
+  trunk:
+    - fishhook
+    - SDAutoLayout
+
+EXTERNAL SOURCES:
+  SDMagicHook:
+    :path: "."
+
+SPEC CHECKSUMS:
+  fishhook: ea19933abfe8f2f52c55fd8b6e2718467d3ebc89
+  SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
+  SDMagicHook: 19e83b1662ae484675b726ccdbb26c88fe8a5e7c
+
+PODFILE CHECKSUM: 4964282fefe8ef2484903b28677aea50ecdca294
+
+COCOAPODS: 1.8.4

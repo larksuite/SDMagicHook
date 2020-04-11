@@ -7,7 +7,7 @@
 //
 
 #import "DemoVC2.h"
-#import "SDMagicHook.h"
+#import <SDMagicHook.h>
 #import "SDAutoLayout.h"
 
 static int viewWillAppearTag;

@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "SDMagicHook"
-  spec.version      = "1.1.0"
+  spec.version      = "1.2.0"
   spec.summary      = "A safe and influence-restricted method hooking for both Objective-C and Swift."
 
   # This description is used to generate tags and improve search results.
@@ -96,11 +96,11 @@ Pod::Spec.new do |spec|
   #  For header files it will include any header in the folder.
   #  Not including the public_header_files will make all headers public.
   #
-
-  spec.source_files  = "SDHookDemo/SDHook", "SDHookDemo/SDHook/**/*.{h,m}"
-  # spec.exclude_files = "Classes/Exclude"
-
-  # spec.public_header_files = "Classes/**/*.h"
+  
+  mrc_files = 'SDHook/SDMRCTool.m'
+  spec.exclude_files = mrc_files
+  spec.source_files  = "SDHook/*.{h,m}"
+  spec.public_header_files = "SDHook/SDMagicHook.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -137,7 +137,10 @@ Pod::Spec.new do |spec|
   #  you can include multiple dependencies to ensure it works.
 
   spec.requires_arc = true
-  non_arc_files = 'SDHookDemo/SDHook/SDMRCTool.{h,m}'
+  spec.subspec 'mrc' do |sp|
+      sp.source_files = mrc_files
+      sp.requires_arc = false
+  end
 
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   spec.dependency "fishhook"

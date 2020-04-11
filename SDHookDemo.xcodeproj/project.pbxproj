@@ -3,42 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		416EB29445A9513AA436EC63 /* Pods_SDHookDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05E122112D850778949FC818 /* Pods_SDHookDemo.framework */; };
 		48366EC223B4EFA8000786B9 /* DemoVC4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48366EC123B4EFA8000786B9 /* DemoVC4.swift */; };
-		485673D024269B54008C597B /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 485673CF24269B54008C597B /* fishhook.c */; };
-		485FD535241546910035BC7A /* SDMRCTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FD533241546910035BC7A /* SDMRCTool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		487792BD23857FB200E3DAE8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792BC23857FB200E3DAE8 /* AppDelegate.m */; };
 		487792C023857FB200E3DAE8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792BF23857FB200E3DAE8 /* SceneDelegate.m */; };
 		487792C623857FB200E3DAE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 487792C423857FB200E3DAE8 /* Main.storyboard */; };
 		487792C823857FB300E3DAE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 487792C723857FB300E3DAE8 /* Assets.xcassets */; };
 		487792CB23857FB300E3DAE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 487792C923857FB300E3DAE8 /* LaunchScreen.storyboard */; };
 		487792CE23857FB300E3DAE8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792CD23857FB300E3DAE8 /* main.m */; };
-		487792E123857FD000E3DAE8 /* SDClassManagerLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792D723857FD000E3DAE8 /* SDClassManagerLock.m */; };
-		487792E223857FD000E3DAE8 /* SDDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792D823857FD000E3DAE8 /* SDDict.m */; };
-		487792E323857FD000E3DAE8 /* SDMagicHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792DB23857FD000E3DAE8 /* SDMagicHook.m */; };
-		487792E423857FD000E3DAE8 /* SDNewClassManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792DC23857FD000E3DAE8 /* SDNewClassManager.m */; };
-		487792E623857FD000E3DAE8 /* SDOrderedDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792E023857FD000E3DAE8 /* SDOrderedDict.m */; };
 		487792EE2385827000E3DAE8 /* DemoVC0.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792ED2385826F00E3DAE8 /* DemoVC0.m */; };
 		487792F12385877500E3DAE8 /* DemoVC1.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792F02385877500E3DAE8 /* DemoVC1.m */; };
 		487792F423858D2400E3DAE8 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487792F323858D2400E3DAE8 /* BaseViewController.m */; };
 		48A89380238AB0EA00E624FF /* DemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A8937C238AB0EA00E624FF /* DemoCell.m */; };
 		48A89381238AB0EA00E624FF /* DemoTableViewControler.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A8937D238AB0EA00E624FF /* DemoTableViewControler.m */; };
-		48A89388238AB10800E624FF /* UIView+SDAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A89383238AB10800E624FF /* UIView+SDAutoLayout.m */; };
-		48A89389238AB10800E624FF /* UITableView+SDAutoTableViewCellHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A89386238AB10800E624FF /* UITableView+SDAutoTableViewCellHeight.m */; };
 		48A8938C238AB82500E624FF /* DemoVC2.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A8938B238AB82500E624FF /* DemoVC2.m */; };
 		48A8938F238AD18800E624FF /* DemoVC3.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A8938E238AD18800E624FF /* DemoVC3.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05E122112D850778949FC818 /* Pods_SDHookDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SDHookDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1775F2021196B61EF36322DD /* Pods-SDHookDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDHookDemo.debug.xcconfig"; path = "Target Support Files/Pods-SDHookDemo/Pods-SDHookDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		48366EC023B4EFA7000786B9 /* SDMagicHookDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SDMagicHookDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		48366EC123B4EFA8000786B9 /* DemoVC4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoVC4.swift; sourceTree = "<group>"; };
-		485673CE24269B54008C597B /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
-		485673CF24269B54008C597B /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
-		485FD533241546910035BC7A /* SDMRCTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMRCTool.m; sourceTree = "<group>"; };
-		485FD534241546910035BC7A /* SDMRCTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMRCTool.h; sourceTree = "<group>"; };
 		487792B823857FB200E3DAE8 /* SDHookDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDHookDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		487792BB23857FB200E3DAE8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		487792BC23857FB200E3DAE8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -49,16 +39,6 @@
 		487792CA23857FB300E3DAE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		487792CC23857FB300E3DAE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		487792CD23857FB300E3DAE8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		487792D523857FD000E3DAE8 /* SDNewClassManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDNewClassManager.h; sourceTree = "<group>"; };
-		487792D623857FD000E3DAE8 /* SDMagicHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMagicHook.h; sourceTree = "<group>"; };
-		487792D723857FD000E3DAE8 /* SDClassManagerLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDClassManagerLock.m; sourceTree = "<group>"; };
-		487792D823857FD000E3DAE8 /* SDDict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDDict.m; sourceTree = "<group>"; };
-		487792D923857FD000E3DAE8 /* SDOrderedDict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDOrderedDict.h; sourceTree = "<group>"; };
-		487792DB23857FD000E3DAE8 /* SDMagicHook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMagicHook.m; sourceTree = "<group>"; };
-		487792DC23857FD000E3DAE8 /* SDNewClassManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDNewClassManager.m; sourceTree = "<group>"; };
-		487792DD23857FD000E3DAE8 /* SDClassManagerLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDClassManagerLock.h; sourceTree = "<group>"; };
-		487792DE23857FD000E3DAE8 /* SDDict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDict.h; sourceTree = "<group>"; };
-		487792E023857FD000E3DAE8 /* SDOrderedDict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDOrderedDict.m; sourceTree = "<group>"; };
 		487792EC2385826F00E3DAE8 /* DemoVC0.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoVC0.h; sourceTree = "<group>"; };
 		487792ED2385826F00E3DAE8 /* DemoVC0.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoVC0.m; sourceTree = "<group>"; };
 		487792EF2385877500E3DAE8 /* DemoVC1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoVC1.h; sourceTree = "<group>"; };
@@ -69,15 +49,11 @@
 		48A8937D238AB0EA00E624FF /* DemoTableViewControler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTableViewControler.m; sourceTree = "<group>"; };
 		48A8937E238AB0EA00E624FF /* DemoTableViewControler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoTableViewControler.h; sourceTree = "<group>"; };
 		48A8937F238AB0EA00E624FF /* DemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoCell.h; sourceTree = "<group>"; };
-		48A89383238AB10800E624FF /* UIView+SDAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDAutoLayout.m"; sourceTree = "<group>"; };
-		48A89384238AB10800E624FF /* UITableView+SDAutoTableViewCellHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+SDAutoTableViewCellHeight.h"; sourceTree = "<group>"; };
-		48A89385238AB10800E624FF /* SDAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAutoLayout.h; sourceTree = "<group>"; };
-		48A89386238AB10800E624FF /* UITableView+SDAutoTableViewCellHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+SDAutoTableViewCellHeight.m"; sourceTree = "<group>"; };
-		48A89387238AB10800E624FF /* UIView+SDAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDAutoLayout.h"; sourceTree = "<group>"; };
 		48A8938A238AB82500E624FF /* DemoVC2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoVC2.h; sourceTree = "<group>"; };
 		48A8938B238AB82500E624FF /* DemoVC2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoVC2.m; sourceTree = "<group>"; };
 		48A8938D238AD18800E624FF /* DemoVC3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoVC3.h; sourceTree = "<group>"; };
 		48A8938E238AD18800E624FF /* DemoVC3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoVC3.m; sourceTree = "<group>"; };
+		D51C1B5C4C5A4A78614A5596 /* Pods-SDHookDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDHookDemo.release.xcconfig"; path = "Target Support Files/Pods-SDHookDemo/Pods-SDHookDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,27 +61,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				416EB29445A9513AA436EC63 /* Pods_SDHookDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		483E4E592433906000A1195B /* Libs */ = {
+		4537D94EB4D7B11E23C06955 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				483E4E5A2433906000A1195B /* FishHook */,
+				1775F2021196B61EF36322DD /* Pods-SDHookDemo.debug.xcconfig */,
+				D51C1B5C4C5A4A78614A5596 /* Pods-SDHookDemo.release.xcconfig */,
 			);
-			path = Libs;
-			sourceTree = "<group>";
-		};
-		483E4E5A2433906000A1195B /* FishHook */ = {
-			isa = PBXGroup;
-			children = (
-				483E4E5B2433906000A1195B /* fishhook.c */,
-				483E4E5C2433906000A1195B /* fishhook.h */,
-			);
-			path = FishHook;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		487792AF23857FB200E3DAE8 = {
@@ -113,6 +82,8 @@
 			children = (
 				487792BA23857FB200E3DAE8 /* SDHookDemo */,
 				487792B923857FB200E3DAE8 /* Products */,
+				4537D94EB4D7B11E23C06955 /* Pods */,
+				497C333701926251621ED85F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,10 +98,8 @@
 		487792BA23857FB200E3DAE8 /* SDHookDemo */ = {
 			isa = PBXGroup;
 			children = (
-				483E4E592433906000A1195B /* Libs */,
 				487792E82385802500E3DAE8 /* Demos */,
 				487792E72385802500E3DAE8 /* Others */,
-				487792D423857FD000E3DAE8 /* SDHook */,
 				487792C423857FB200E3DAE8 /* Main.storyboard */,
 				487792C723857FB300E3DAE8 /* Assets.xcassets */,
 				487792C923857FB300E3DAE8 /* LaunchScreen.storyboard */,
@@ -140,29 +109,9 @@
 			path = SDHookDemo;
 			sourceTree = "<group>";
 		};
-		487792D423857FD000E3DAE8 /* SDHook */ = {
-			isa = PBXGroup;
-			children = (
-				485FD534241546910035BC7A /* SDMRCTool.h */,
-				485FD533241546910035BC7A /* SDMRCTool.m */,
-				487792D523857FD000E3DAE8 /* SDNewClassManager.h */,
-				487792D623857FD000E3DAE8 /* SDMagicHook.h */,
-				487792D723857FD000E3DAE8 /* SDClassManagerLock.m */,
-				487792D823857FD000E3DAE8 /* SDDict.m */,
-				487792D923857FD000E3DAE8 /* SDOrderedDict.h */,
-				487792DB23857FD000E3DAE8 /* SDMagicHook.m */,
-				487792DC23857FD000E3DAE8 /* SDNewClassManager.m */,
-				487792DD23857FD000E3DAE8 /* SDClassManagerLock.h */,
-				487792DE23857FD000E3DAE8 /* SDDict.h */,
-				487792E023857FD000E3DAE8 /* SDOrderedDict.m */,
-			);
-			path = SDHook;
-			sourceTree = "<group>";
-		};
 		487792E72385802500E3DAE8 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				48A89382238AB10800E624FF /* SDAutoLayout */,
 				487792BB23857FB200E3DAE8 /* AppDelegate.h */,
 				487792BC23857FB200E3DAE8 /* AppDelegate.m */,
 				487792BE23857FB200E3DAE8 /* SceneDelegate.h */,
@@ -174,8 +123,6 @@
 		487792E82385802500E3DAE8 /* Demos */ = {
 			isa = PBXGroup;
 			children = (
-				485673CF24269B54008C597B /* fishhook.c */,
-				485673CE24269B54008C597B /* fishhook.h */,
 				48A8937F238AB0EA00E624FF /* DemoCell.h */,
 				48A8937C238AB0EA00E624FF /* DemoCell.m */,
 				48A8937E238AB0EA00E624FF /* DemoTableViewControler.h */,
@@ -196,16 +143,12 @@
 			path = Demos;
 			sourceTree = "<group>";
 		};
-		48A89382238AB10800E624FF /* SDAutoLayout */ = {
+		497C333701926251621ED85F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				48A89383238AB10800E624FF /* UIView+SDAutoLayout.m */,
-				48A89384238AB10800E624FF /* UITableView+SDAutoTableViewCellHeight.h */,
-				48A89385238AB10800E624FF /* SDAutoLayout.h */,
-				48A89386238AB10800E624FF /* UITableView+SDAutoTableViewCellHeight.m */,
-				48A89387238AB10800E624FF /* UIView+SDAutoLayout.h */,
+				05E122112D850778949FC818 /* Pods_SDHookDemo.framework */,
 			);
-			path = SDAutoLayout;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,9 +158,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 487792D123857FB300E3DAE8 /* Build configuration list for PBXNativeTarget "SDHookDemo" */;
 			buildPhases = (
+				4048BE1B0DAB43F34D9C1E11 /* [CP] Check Pods Manifest.lock */,
 				487792B423857FB200E3DAE8 /* Sources */,
 				487792B523857FB200E3DAE8 /* Frameworks */,
 				487792B623857FB200E3DAE8 /* Resources */,
+				B1443074DA5C11F1C0B65DE0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -274,25 +219,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4048BE1B0DAB43F34D9C1E11 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SDHookDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1443074DA5C11F1C0B65DE0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SDHookDemo/Pods-SDHookDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SDHookDemo/Pods-SDHookDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SDHookDemo/Pods-SDHookDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		487792B423857FB200E3DAE8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				487792E623857FD000E3DAE8 /* SDOrderedDict.m in Sources */,
-				485FD535241546910035BC7A /* SDMRCTool.m in Sources */,
-				487792E423857FD000E3DAE8 /* SDNewClassManager.m in Sources */,
 				48366EC223B4EFA8000786B9 /* DemoVC4.swift in Sources */,
-				48A89388238AB10800E624FF /* UIView+SDAutoLayout.m in Sources */,
-				487792E223857FD000E3DAE8 /* SDDict.m in Sources */,
-				485673D024269B54008C597B /* fishhook.c in Sources */,
-				487792E123857FD000E3DAE8 /* SDClassManagerLock.m in Sources */,
 				48A8938F238AD18800E624FF /* DemoVC3.m in Sources */,
 				48A8938C238AB82500E624FF /* DemoVC2.m in Sources */,
-				487792E323857FD000E3DAE8 /* SDMagicHook.m in Sources */,
 				487792BD23857FB200E3DAE8 /* AppDelegate.m in Sources */,
 				487792EE2385827000E3DAE8 /* DemoVC0.m in Sources */,
-				48A89389238AB10800E624FF /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				487792CE23857FB300E3DAE8 /* main.m in Sources */,
 				487792F423858D2400E3DAE8 /* BaseViewController.m in Sources */,
 				48A89380238AB0EA00E624FF /* DemoCell.m in Sources */,
@@ -436,6 +414,7 @@
 		};
 		487792D223857FB300E3DAE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1775F2021196B61EF36322DD /* Pods-SDHookDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -443,7 +422,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 8D5EHT9KTL;
 				INFOPLIST_FILE = SDHookDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,6 +438,7 @@
 		};
 		487792D323857FB300E3DAE8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D51C1B5C4C5A4A78614A5596 /* Pods-SDHookDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -466,7 +446,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 8D5EHT9KTL;
 				INFOPLIST_FILE = SDHookDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -1,0 +1,6 @@
+framework module SDMagicHook {
+  umbrella header "SDMagicHook-umbrella.h"
+
+  export *
+  module * { export * }
+}

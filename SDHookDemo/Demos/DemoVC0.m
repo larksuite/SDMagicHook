@@ -7,7 +7,7 @@
 //
 
 #import "DemoVC0.h"
-#import "SDMagicHook.h"
+#import <SDMagicHook.h>
 #import "SDAutoLayout.h"
 #import <objc/runtime.h>
 

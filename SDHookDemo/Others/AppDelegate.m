@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "SDMagicHook.h"
+#import <SDMagicHook.h>
 
 @interface Test : NSObject
 @property (nonatomic, assign) int num;
