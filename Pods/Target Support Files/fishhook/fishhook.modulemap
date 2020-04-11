@@ -1,6 +1,0 @@
-framework module fishhook {
-  umbrella header "fishhook-umbrella.h"
-
-  export *
-  module * { export * }
-}

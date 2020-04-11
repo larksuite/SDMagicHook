@@ -97,7 +97,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
   
-  mrc_files = 'SDHook/SDMRCTool.m'
+  mrc_files = 'SDHook/SDMRCTool.m', 'SDHook/SDMRCTool.h'
   spec.exclude_files = mrc_files
   spec.source_files  = "SDHook/*.{h,m}"
   spec.public_header_files = "SDHook/SDMagicHook.h"
