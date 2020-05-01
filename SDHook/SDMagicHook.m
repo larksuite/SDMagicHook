@@ -20,8 +20,6 @@
 #import "SDMagicHookUtils.h"
 
 BOOL SDMagicHookDebugFlag = true;
-Class _Nullable (*sd_original_setclass) (id _Nullable obj, Class _Nonnull cls);
-extern Class _Nullable sd_magichook_set_calss(id _Nullable obj, Class _Nonnull cls);
 
 static NSString *const currentCallIndexDictKey = @"SDMagicHook-currentCallIndexDictKey";
 static NSString *const originalCallFlagDictKey = @"SDMagicHook-originalCallFlagDictKey";
@@ -143,10 +141,7 @@ static NSString *const keyForOriginalCallFlag = @"SDMagicHook-keyForOriginalCall
 - (NSString *)hookMethod:(SEL)sel strId:(NSString *)strId imp:(IMP)imp {
     pthread_rwlock_wrlock(&[self getManagerLock]->_rw_lock3);
 
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        rebind_symbols((struct rebinding[1]){{"object_setClass", sd_magichook_set_calss, (void *)&sd_original_setclass}}, 1);
-    });
+    [SDMagicHookUtils hookSetClassFuncJustOnce];
 
     SDNewClassManager *mgr = [self getClassManager];
     if (!mgr.hasSetupKVO) {

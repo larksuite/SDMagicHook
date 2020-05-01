@@ -29,6 +29,8 @@ NSMutableDictionary *threadStoredDict(const NSString *const key, NSString *class
 
 @interface SDMagicHookUtils : NSObject
 
++ (void)hookSetClassFuncJustOnce;
+
 @end
 
 NS_ASSUME_NONNULL_END

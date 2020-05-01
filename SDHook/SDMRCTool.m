@@ -10,22 +10,6 @@
 #include <objc/runtime.h>
 #import "SDMagicHookUtils.h"
 
-extern Class _Nullable (*sd_original_setclass) (id _Nullable obj, Class _Nonnull cls);
-
-Class _Nullable sd_magichook_set_calss(id _Nullable obj, Class _Nonnull cls) {
-
-    if (sd_ifClassNameHasPrefix(cls, "NSKVONotifying_")) {
-        Class originalClass = object_getClass(obj);
-        if (sd_ifClassIsSDMagicClass(originalClass)) {
-            return originalClass;
-        } else {
-            return sd_original_setclass(obj, cls);
-        }
-    } else {
-        return sd_original_setclass(obj, cls);
-    }
-}
-
 @implementation SDMRCTool
 
 + (void)object_copyIndexedIvars:(id)obj toCopy:(id)toCopy {
