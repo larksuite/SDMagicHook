@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "SDMagicHook"
-  spec.version      = "1.2.2"
+  spec.version      = "1.2.3"
   spec.summary      = "A safe and influence-restricted method hooking for both Objective-C and Swift."
 
   # This description is used to generate tags and improve search results.
