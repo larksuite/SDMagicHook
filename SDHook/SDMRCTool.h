@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)object_copyIndexedIvars:(id)obj toCopy:(id)toCopy;
 + (void)copyClassIndexedIvarsCFDictionaryValue:(Class)cls from:(SEL)from to:(SEL)to;
+
++ (void)hookSetClassFuncJustOnce;
+
 @end
 
 NS_ASSUME_NONNULL_END

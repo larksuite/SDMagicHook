@@ -18,6 +18,7 @@
 #import "SDMRCTool.h"
 #import "fishhook.h"
 #import "SDMagicHookUtils.h"
+#import "SDMRCTool.h"
 
 BOOL SDMagicHookDebugFlag = true;
 
@@ -141,7 +142,7 @@ static NSString *const keyForOriginalCallFlag = @"SDMagicHook-keyForOriginalCall
 - (NSString *)hookMethod:(SEL)sel strId:(NSString *)strId imp:(IMP)imp {
     pthread_rwlock_wrlock(&[self getManagerLock]->_rw_lock3);
 
-    [SDMagicHookUtils hookSetClassFuncJustOnce];
+    [SDMRCTool hookSetClassFuncJustOnce];
 
     SDNewClassManager *mgr = [self getClassManager];
     if (!mgr.hasSetupKVO) {
