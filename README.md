@@ -16,6 +16,7 @@ Now SDMagicHook will solve the problems mentioned above.
 
 ## Changes Log
 2020.05.01 -- release KVO-compatible version "1.2.4"
+
 2020.03.09 -- KVO compatible 
 
 ## Usage
