@@ -1,14 +1,14 @@
 PODS:
   - fishhook (0.2)
   - SDAutoLayout (2.2.1)
-  - SDMagicHook (1.2.1):
+  - SDMagicHook (1.2.4):
     - fishhook
-    - SDMagicHook/SDMagicHookMRCTool (= 1.2.1)
-    - SDMagicHook/SDMagicHookUtils (= 1.2.1)
-  - SDMagicHook/SDMagicHookMRCTool (1.2.1):
+    - SDMagicHook/SDMagicHookMRCTool (= 1.2.4)
+    - SDMagicHook/SDMagicHookUtils (= 1.2.4)
+  - SDMagicHook/SDMagicHookMRCTool (1.2.4):
     - fishhook
     - SDMagicHook/SDMagicHookUtils
-  - SDMagicHook/SDMagicHookUtils (1.2.1):
+  - SDMagicHook/SDMagicHookUtils (1.2.4):
     - fishhook
 
 DEPENDENCIES:
@@ -27,8 +27,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   fishhook: ea19933abfe8f2f52c55fd8b6e2718467d3ebc89
   SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
-  SDMagicHook: bd5525dcef420da9475540bac902472abcd4d388
+  SDMagicHook: 02780b027a1f6275b4a587e31d784f754564b607
 
 PODFILE CHECKSUM: 4964282fefe8ef2484903b28677aea50ecdca294
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3
