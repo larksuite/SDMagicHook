@@ -50,9 +50,10 @@
 
 
     // hook view.layer的setBackgroundColor方法，看是否有人直接或者间接改了view.layer的背景色
-    [self.view.layer hookMethod:@selector(setBackgroundColor:) impBlock:^(CALayer *layer, CGColorRef color){
-        [layer callOriginalMethodInBlock:^{
-            [layer setBackgroundColor:color];
+    // layer比较特殊可能需要适配，先将demo中的layer换成view
+    [self.view hookMethod:@selector(setBackgroundColor:) impBlock:^(UIView *this, UIColor *color){
+        [this callOriginalMethodInBlock:^{
+            [this setBackgroundColor:color];
         }];
         [wkSelf showString:[NSString stringWithFormat:@"AHA! Catch it! Here are the clues.\n\n%@", [NSThread callStackSymbols]]];
     }];
