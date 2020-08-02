@@ -1,5 +1,8 @@
 # SDMagicHook
 
+[ 原理解析1](https://mp.weixin.qq.com/s/wxigL1Clem1dR8Nkt8LLMw) [原理解析2](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMjE0MQ==&mid=2247486231&idx=1&sn=1c6584e9dcc3edf71c42cf396bcab051&chksm=e9d0c0f5dea749e34bf23de8259cbc7c868d3c8a6fc56c4366412dfb03eac8f037ee1d8668a1&token=1383088962&lang=zh_CN#rd)   [ 与Aspects异同](https://github.com/larksuite/SDMagicHook/issues/3)
+
+
 一种可以用于Objective-C 和 Swift的安全的影响范围可控的基于实例粒度的hook工具。
 
 ## 对传统swizzling的改进
