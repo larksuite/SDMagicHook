@@ -15,7 +15,7 @@ Classical method swizzling with method_exchangeImplementations is quite simple, 
 Now SDMagicHook will solve the problems mentioned above.
 
 ## Changes Log
-2020.05.01 -- fix bug about KVO compatibility, release "1.2.5"
+2020.08.02 -- fix bug about KVO compatibility, release "1.2.5"
 
 2020.05.01 -- release KVO-compatible version "1.2.4"
 
