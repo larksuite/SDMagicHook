@@ -145,9 +145,11 @@ static NSString *const keyForOriginalCallFlag = @"SDMagicHook-keyForOriginalCall
     [SDMRCTool hookSetClassFuncJustOnce];
 
     SDNewClassManager *mgr = [self getClassManager];
+    Boolean isSettingTmpKVO = NO;
     if (!mgr.hasSetupKVO) {
         [self addObserver:mgr forKeyPath:@"class" options:NSKeyValueObservingOptionNew context:nil];
         mgr.hasSetupKVO = YES;
+        isSettingTmpKVO = true;
     }
     NSString *selStr = NSStringFromSelector(sel);
     Class currentCls = object_getClass(self);
@@ -178,6 +180,9 @@ static NSString *const keyForOriginalCallFlag = @"SDMagicHook-keyForOriginalCall
     int resetTimes = [self sd_resetCountForSel:sel];
     Method method = class_getInstanceMethod(currentCls, sel);
     Class newCls = NSClassFromString(newClsName);
+    if (isSettingTmpKVO) {
+        [self removeObserver:mgr forKeyPath:@"class"];
+    }
     if (newCls == nil && newClsName) {
         newCls = [self setupNewClassWithName:newClsName currentCls:currentCls isKVOClass:isKVOClass];
     }
